@@ -1,0 +1,23 @@
+{
+  "name": "twitterclone",
+  "version": "1.0.0",
+  "authors": [
+    "marrrcin <m.zablo@gmail.com>"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.2",
+    "lodash": "~3.2.0"
+  },
+  "private": true
+}
