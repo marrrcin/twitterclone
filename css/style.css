@@ -15,8 +15,14 @@ body {
   background-color: #cc0000;
   color: white; }
 
+.loader-icon {
+  text-align: center; }
+
 .loader-icon > i {
-  color: #cc0000; }
+  color: #cc0000;
+  marigin: 0 auto;
+  opacity: 0.75;
+  font-size: 48px; }
 
 .form-control.narrow {
   width: 50%;

@@ -42,6 +42,12 @@ gulp.task("css",function(){
         .pipe(gulp.dest("dist/css"));
 });
 
+gulp.task("fontawesome",function(){
+   var fontResources = [bowerPath + "components-font-awesome/fonts/*"];
+    return gulp.src(fontResources)
+        .pipe(gulp.dest("dist/fonts"))
+});
+
 gulp.task("app",function(){
     var appSources = ["./app/**/*.html"];
     return gulp.src(appSources)
