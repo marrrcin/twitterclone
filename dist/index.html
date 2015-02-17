@@ -3,24 +3,17 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Angular Twitter Clone</title>
-    <script src="js/ng-twitter.min.js"></script>
+    <script src="js/ng-twitter.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <nav>
-                <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="#">Everything</a></a></li>
-                    <li role="presentation" class=""><a href="#">New post</a></a></li>
-                    <li role="presentation" class=""><a href="#">Search</a></a></li>
-                </ul>
-            </nav>
+            <navigation></navigation>
             <h3 class="text-muted">ng-Twitter Clone</h3>
-            <ng-view></ng-view>
         </div>
-
+        <ng-view></ng-view>
     </div>
 
 </body>

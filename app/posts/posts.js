@@ -38,7 +38,7 @@ twitterClone.directive("posts",function(){
             posts : "=",
             filter: "="
         },
-        templateUrl : "templates/posts.html"
+        templateUrl : "app/posts/posts.html"
     };
 
     return options;

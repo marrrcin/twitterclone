@@ -18,7 +18,8 @@ var mainJs = "app/app.js";
 var jsPath = "app/**/*.js";
 var bowerPath = "bower_components/";
 var fromBower = ["angular/angular.js",
-                    "lodash/lodash.js"
+                    "lodash/lodash.js",
+                    "angular-route/angular-route.js"
                 ];
 
 gulp.task("lint",function(){
