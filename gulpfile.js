@@ -86,4 +86,4 @@ gulp.task("watch",function(){
 //default task (run when "gulp" cmd is used)
 gulp.task("default",["lint","sass","watch"]);
 
-gulp.task("release",["lint","sass","scripts","css","html","app"]);
+gulp.task("release",["lint","sass","scripts","css","html","app","fontawesome"]);
