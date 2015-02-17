@@ -14,14 +14,15 @@ var processOptions = {},
     uglifyOptions = {mangle:true};
 
 //paths
-var jsPath = "js/*.js";
+var mainJs = "app/app.js";
+var jsPath = "app/**/*.js";
 var bowerPath = "bower_components/";
 var fromBower = ["angular/angular.js",
                     "lodash/lodash.js"
                 ];
 
 gulp.task("lint",function(){
-   return gulp.src("js/*.js")
+   return gulp.src("app/**/*.js")
        .pipe(jshint())
        .pipe(jshint.reporter("default"));
 });
@@ -34,16 +35,23 @@ gulp.task("sass",function(){
 });
 
 gulp.task("css",function(){
-    var csses = ["./*.css",bowerPath + "bootstrap/dist/css/bootstrap.min.css"];
+    var csses = ["./css/*.css",bowerPath + "bootstrap/dist/css/bootstrap.min.css"];
     return gulp.src(csses)
         .pipe(gulp.dest("dist/css"));
 });
+
+gulp.task("app",function(){
+    var appSources = ["./app/**/*.html"];
+    return gulp.src(appSources)
+        .pipe(gulp.dest("dist/app"));
+})
 
 gulp.task("scripts",function(){
     var scripts = [];
     for(var i=0;i<fromBower.length;i++){
         scripts.push(bowerPath + fromBower[i]);
     }
+    scripts.push(mainJs);
     scripts.push(jsPath);
 
     return gulp.src(scripts)
@@ -62,7 +70,7 @@ gulp.task("html",function(){
 
 //watcher
 gulp.task("watch",function(){
-    gulp.watch("js/*.js",["lint","scripts"]);
+    gulp.watch("app/**/*.js",["lint"]);
     gulp.watch("./*.html",["html"]);
     gulp.watch("scss/*.scss",["sass"]);
 });
@@ -70,4 +78,4 @@ gulp.task("watch",function(){
 //default task (run when "gulp" cmd is used)
 gulp.task("default",["lint","sass","watch"]);
 
-gulp.task("release",["lint","sass","scripts","css","html"]);
+gulp.task("release",["lint","sass","scripts","css","html","app"]);

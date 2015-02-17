@@ -37348,8 +37348,13 @@ var minlengthDirective = function() {
 }.call(this));
 
 var postsApiUrl = "http://twitterclone.azurewebsites.net/api/";
-var twitterClone = angular.module("twitterClone",[]);
-twitterClone.controller("postsController",["$scope","$http",function($scope,$http){
+var lodashModule = angular.module("lodash",[])
+    .factory("_",function(){
+        return window._;
+    });
+var twitterClone = angular.module("twitterClone",["lodash"]);
+
+twitterClone.controller("postsController",["$scope","$http","_",function($scope,$http,_){
     var posts = [],
         getPosts = function(){
             $http.get(postsApiUrl+"posts")
@@ -37363,8 +37368,20 @@ twitterClone.controller("postsController",["$scope","$http",function($scope,$htt
                 });
         },
 
-        
+        search = function(item){
+            return $scope.searchText === "" || item.text.toLowerCase().indexOf($scope.searchText)!==-1 || item.author.toLowerCase().indexOf($scope.searchText)!==-1;
+        },
+        countFiltered = function(){
+            return _.filter(posts,search).length;
+        },
+        onSearchTextChange = function(){
+            $scope.searchCount = countFiltered();
+        };
 
+    $scope.searchText = "";
+    $scope.searchTextChange = onSearchTextChange;
+    $scope.searchCount = countFiltered();
+    $scope.search = search;
 
 
     getPosts();
@@ -37377,7 +37394,7 @@ twitterClone.directive("posts",function(){
             posts : "=",
             filter: "="
         },
-        templateUrl : "posts.html"
+        templateUrl : "templates/posts.html"
     };
 
     return options;
