@@ -36,7 +36,8 @@ gulp.task("sass",function(){
 });
 
 gulp.task("css",function(){
-    var csses = ["./css/*.css",bowerPath + "bootstrap/dist/css/bootstrap.min.css"];
+    var csses = ["./css/*.css",bowerPath + "bootstrap/dist/css/bootstrap.min.css",
+                bowerPath + "components-font-awesome/css/font-awesome.min.css"];
     return gulp.src(csses)
         .pipe(gulp.dest("dist/css"));
 });

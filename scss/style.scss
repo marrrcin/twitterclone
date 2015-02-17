@@ -34,6 +34,10 @@ body {
   }
 }
 
+.loader-icon > i {
+  color : $niceRed;
+}
+
 .form-control.narrow {
   width:50%;
   display:block;

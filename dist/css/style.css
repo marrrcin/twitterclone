@@ -15,6 +15,9 @@ body {
   background-color: #cc0000;
   color: white; }
 
+.loader-icon > i {
+  color: #cc0000; }
+
 .form-control.narrow {
   width: 50%;
   display: block;

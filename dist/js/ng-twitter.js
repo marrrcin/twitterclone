@@ -38367,11 +38367,13 @@ twitterClone.controller("newpostController",[function(){
 twitterClone.controller("postsController",["$scope","$http","_",function($scope,$http,_){
     var posts = [],
         getPosts = function(){
+            $scope.loaded = false;
             $http.get(postsApiUrl+"posts")
                 .success(function(data,status,headers,config){
                     posts = angular.fromJson(data);
                     $scope.posts1 = posts.slice(0,posts.length/2);
                     $scope.posts2 = posts.slice(posts.length/2);
+                    $scope.loaded = true;
                 })
                 .error(function(data,status,headers,config){
                     //dunno wat 2 do
@@ -38390,6 +38392,7 @@ twitterClone.controller("postsController",["$scope","$http","_",function($scope,
 
     $scope.searchText = "";
     $scope.searchTextChange = onSearchTextChange;
+    $scope.loaded = false;
     $scope.searchCount = countFiltered();
     $scope.search = search;
 
