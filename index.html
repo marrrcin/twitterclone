@@ -20,33 +20,29 @@
         <div class="header">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="#">House</a></a></li>
-                    <li role="presentation" class=""><a href="#">Something</a></a></li>
-                    <li role="presentation" class=""><a href="#">Another</a></a></li>
+                    <li role="presentation" class="active"><a href="#">Everything</a></a></li>
+                    <li role="presentation" class=""><a href="#">New post</a></a></li>
+                    <li role="presentation" class=""><a href="#">Search</a></a></li>
                 </ul>
             </nav>
             <h3 class="text-muted">ng-Twitter Clone</h3>
         </div>
-
-        <div class="jumbotron">
-            <h1>Jumbotron is awesome!</h1>
-        </div>
-
-
-        <div class="row marketing">
-            <div class="col-xs-6">
-                <h4>Subheader</h4>
-                <p>Lets say it's a post</p>
-
-                <h4>Subheader</h4>
-                <p>Lets sayt it's not a post</p>
+        <div ng-controller="postsController">
+            <div class="jumbotron" >
+                <h1><span ng-hide="searchText">#search</span>
+                    <span ng-show="searchText">#found : {{searchCount}}</span></h1>
+                <input type="text" ng-model="searchText" ng-change="searchTextChange()" class="form-control narrow">
             </div>
-            <div class="col-xs-6">
-                <h4>Subheader col2</h4>
-                <p>Lets say it's a post</p>
 
-                <h4>Subheader - col2</h4>
-                <p>Lets sayt it's not a post</p>
+
+
+            <div class="row marketing">
+                <div class="col-xs-6">
+                    <posts posts="posts1" filter="search"></posts>
+                </div>
+                <div class="col-xs-6">
+                    <posts posts="posts2" filter="search"></posts>
+                </div>
             </div>
         </div>
     </div>

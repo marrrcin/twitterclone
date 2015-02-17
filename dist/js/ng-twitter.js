@@ -37347,8 +37347,39 @@ var minlengthDirective = function() {
   }
 }.call(this));
 
+var postsApiUrl = "http://twitterclone.azurewebsites.net/api/";
 var twitterClone = angular.module("twitterClone",[]);
-twitterClone.controller("postsController",["$scope",function($scope){
-    $scope.test = "awesome!";
+twitterClone.controller("postsController",["$scope","$http",function($scope,$http){
+    var posts = [],
+        getPosts = function(){
+            $http.get(postsApiUrl+"posts")
+                .success(function(data,status,headers,config){
+                    posts = angular.fromJson(data);
+                    $scope.posts1 = posts.slice(0,posts.length/2);
+                    $scope.posts2 = posts.slice(posts.length/2);
+                })
+                .error(function(data,status,headers,config){
+                    //dunno wat 2 do
+                });
+        },
+
+        
+
+
+
+    getPosts();
 }]);
-var x = 2;
+
+twitterClone.directive("posts",function(){
+    var options = {
+        restrict : "E",
+        scope : {
+            posts : "=",
+            filter: "="
+        },
+        templateUrl : "posts.html"
+    };
+
+    return options;
+
+});

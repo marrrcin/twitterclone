@@ -1,0 +1,4 @@
+<div class="post" ng-repeat="post in posts | filter:filter">
+    <h4>Post #{{post.id}} by {{post.author}}</h4>
+    <p>{{post.text}}</p>
+</div>
