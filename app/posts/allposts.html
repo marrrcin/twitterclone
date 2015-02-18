@@ -9,10 +9,10 @@
         <div class="loader-icon" ng-hide="loaded">
             <i class="fa fa-circle-o-notch fa-spin"></i>
         </div>
-        <div class="col-xs-6">
+        <div ng-show="loaded" class="col-xs-6">
             <posts posts="posts1" filter="search"></posts>
         </div>
-        <div class="col-xs-6">
+        <div ng-show="loaded" class="col-xs-6">
             <posts posts="posts2" filter="search"></posts>
         </div>
     </div>

@@ -19,7 +19,8 @@ var jsPath = "app/**/*.js";
 var bowerPath = "bower_components/";
 var fromBower = ["angular/angular.js",
                     "lodash/lodash.js",
-                    "angular-route/angular-route.js"
+                    "angular-route/angular-route.js",
+                    "anijs/dist/anijs.js"
                 ];
 
 gulp.task("lint",function(){

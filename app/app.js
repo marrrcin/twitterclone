@@ -3,7 +3,13 @@ var lodashModule = angular.module("lodash",[])
     .factory("_",function(){
         return window._;
     });
-var twitterClone = angular.module("twitterClone",["lodash","ngRoute"]);
+
+var anijsModule = angular.module("anijs",[])
+    .factory("AniJS",function(){
+        return window.AniJS;
+    });
+
+var twitterClone = angular.module("twitterClone",["lodash","ngRoute","anijs"]);
 twitterClone.config(["$routeProvider",function($routeProvider){
     $routeProvider
         .when("/",{
@@ -11,14 +17,12 @@ twitterClone.config(["$routeProvider",function($routeProvider){
             controller : "postsController"
         })
         .when("/newpost",{
-            templateUrl : "app/posts/newpost.html",
+            templateUrl : "app/newpost/newpost.html",
             controller : "newpostController"
+        })
+        .when("/search",{
+            templateUrl : "app/search/search.html",
+            controller : "searchController"
         });
 }]);
 
-twitterClone.directive("navigation", function () {
-    return {
-        restrict : "E",
-        templateUrl : "app/shared/navigation.html"
-    };
-});

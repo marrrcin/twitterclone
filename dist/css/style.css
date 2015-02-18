@@ -15,6 +15,24 @@ body {
   background-color: #cc0000;
   color: white; }
 
+.input-group-addon.fixed-width {
+  width: 42px; }
+  .input-group-addon.fixed-width.moved {
+    right: -4px;
+    position: relative; }
+
+.input-group.centered, .btn-group.centered {
+  margin: 0 auto; }
+
+.input-group.centered > .btn {
+  height: 34px;
+  font-size: 14px !important;
+  padding: 4px 10px;
+  color: #555555; }
+
+.form-inline {
+  font-size: 14px !important; }
+
 .loader-icon {
   text-align: center; }
 

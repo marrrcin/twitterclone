@@ -34,6 +34,29 @@ body {
   }
 }
 
+.input-group-addon.fixed-width{
+  width:42px;
+  &.moved {
+    right: -4px;
+    position: relative;
+  }
+}
+
+.input-group.centered , .btn-group.centered{
+    margin : 0 auto;
+}
+
+.input-group.centered > .btn {
+  height: 34px;
+  font-size:14px !important;
+  padding: 4px 10px;
+  color:$darkGray;
+}
+
+.form-inline {
+  font-size:14px !important;
+}
+
 .loader-icon {
   text-align: center;
 }
