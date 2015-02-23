@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Angular Twitter Clone</title>
-    <script src="js/ng-twitter.js"></script>
+    <script src="js/ng-twitter.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -18,5 +18,15 @@
         <ng-view></ng-view>
         <apply-anijs></apply-anijs>
     </div>
+
+    <script type="text/javascript">
+        document.onreadystatechange = function(){
+            if(document.readyState === "complete"){
+                setTimeout(function(){
+                    AniJS.run();
+                },200);
+            }
+        };
+    </script>
 </body>
 </html>

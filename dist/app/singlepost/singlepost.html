@@ -1,0 +1,11 @@
+<div>
+    <div class="jumbotron">
+        <h1 ng-show="isError || noPost">No such post :(</h1>
+        <h1 ng-show="isFail">Cannot connect to server</h1>
+        <div ng-hide="isError || isFail || noPost">
+            <h1>@{{author}}</h1>
+            <h2>{{text}}</h2>
+        </div>
+    </div>
+    <button class="btn dark-font" back>go back</button>
+</div>

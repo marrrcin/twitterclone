@@ -39825,7 +39825,29 @@ var anijsModule = angular.module("anijs",[])
         return window.AniJS;
     });
 
+var postsProvider = angular.module("postsProvider",[])
+    .factory("prostsProvider",["$http",function($http){
+        return {
+            getAll : function(){
+
+            }
+        };
+    }]);
+
 var twitterClone = angular.module("twitterClone",["lodash","ngRoute","anijs"]);
+twitterClone.constant("PostsAPIUrl",postsApiUrl);
+
+twitterClone.directive("back",["$window",function($window){
+    return {
+        restrict : "A",
+        link : function(scope,element,attributes){
+            element.bind("click",function(){
+                $window.history.back();
+            });
+        }
+    };
+}]);
+
 twitterClone.config(["$routeProvider",function($routeProvider){
     $routeProvider
         .when("/",{
@@ -39836,9 +39858,13 @@ twitterClone.config(["$routeProvider",function($routeProvider){
             templateUrl : "app/newpost/newpost.html",
             controller : "newpostController"
         })
-        .when("/search",{
-            templateUrl : "app/search/search.html",
-            controller : "searchController"
+        .when("/authors",{
+            templateUrl : "app/authors/authors.html",
+            controller : "authorsController"
+        })
+        .when("/post/:id",{
+            templateUrl : "app/singlepost/singlepost.html",
+            controller : "singlepostController"
         });
 }]);
 
@@ -39855,26 +39881,86 @@ twitterClone.directive("applyAnijs",["$rootScope","$location","AniJS",function($
     };
 }]);
 
+twitterClone.controller("authorsController",["$scope","$http","_","PostsAPIUrl",function($scope,$http,_,postsApiUrl){
+    var getAuthors = function(){
+        $http.get(postsApiUrl + "posts")
+            .success(function(data,status){
+                var posts = angular.fromJson(data);
+                posts = _.map(posts, function(i){
+                    i.author = i.author.toLowerCase();
+                    return i;
+                });
+                posts = _.uniq(posts,"author");
+                $scope.authors = _.map(posts,"author");
+            })
+            .error(function(data,status){
+
+            });
+    },
+    getPosts = function(author){
+        if(!author){
+            return;
+        }
+        $scope.isLoading = true;
+
+        $http.get(postsApiUrl + "posts/" + author)
+            .success(function(data,status){
+                $scope.postsOfAuthor = data;
+            })
+            .error(function(data,status){
+            })
+            .finally(function(){
+                $scope.isLoading = false;
+            });
+    };
+
+    $scope.authors = getAuthors();
+    $scope.getPosts = getPosts;
+    $scope.postsOfAuthor = [];
+    $scope.isLoading = false;
+}]);
 twitterClone.controller("navigationController",["$scope","$location",function($scope,$location){
     $scope.isActive = function(currentLocation){
         return currentLocation === $location.path();
     };
 }]);
 
-twitterClone.directive("navigation", function () {
+twitterClone.directive("navigation", function(){
     return {
         restrict : "E",
-        templateUrl : "app/navigation/navigation.html"
+        templateUrl : "app/navigation/navigation.html",
+        controller : "navigationController"
     };
 });
-twitterClone.controller("newpostController",["$scope","$http",function($scope,$http){
+twitterClone.controller("newpostController",["$scope","$http","PostsAPIUrl",function($scope,$http,postsApiUrl){
     var sendPost = function(){
-        console.log("submitted!");
+        $scope.firstTry = false;
+        $scope.errorMessage = "";
+        if(!$scope.author || !$scope.newMessage){
+            return;
+        }
+        var toSend = { author : $scope.author,
+                        text : $scope.newMessage
+        };
+
+        $scope.isSending = true;
+        $http.post(postsApiUrl + "posts",toSend)
+            .success(function(data,status,headers,config){
+                $scope.author = "";
+                $scope.newMessage = "";
+                $scope.firstTry = true;
+            })
+            .error(function(data,status,headers,config){
+                $scope.firstTry = false;
+                $scope.errorMessage = "Server returned " + status;
+            });
+        $scope.isSending = false;
     };
 
     $scope.sendPost = sendPost;
+    $scope.firstTry = true;
 }]);
-twitterClone.controller("postsController",["$scope","$http","_",function($scope,$http,_){
+twitterClone.controller("postsController",["$scope","$http","_","PostsAPIUrl",function($scope,$http,_,postsApiUrl){
     var posts = [],
         getPosts = function(){
             $scope.loaded = false;
@@ -39923,6 +40009,24 @@ twitterClone.directive("posts",function(){
     return options;
 
 });
-twitterClone.controller("searchController",[function(){
+twitterClone.controller("singlepostController",["$scope","$http","$routeParams","PostsAPIUrl",function($scope,$http,$routeParams,postsApiUrl){
+    var postId = parseInt($routeParams.id);
+    $scope.isError = !angular.isNumber(postId) || isNaN(postId);
+
+    if(!$scope.isError){
+        $http.get(postsApiUrl + "post/" + postId)
+            .success(function(data,status){
+                if(data === null){
+                    $scope.noPost = true;
+                }
+                else {
+                    $scope.author = data.author.toLowerCase();
+                    $scope.text = data.text;
+                }
+            })
+            .error(function(){
+                $scope.isFail = true;
+            });
+    }
 
 }]);

@@ -15,7 +15,7 @@ var postsProvider = angular.module("postsProvider",[])
             getAll : function(){
 
             }
-        }
+        };
     }]);
 
 var twitterClone = angular.module("twitterClone",["lodash","ngRoute","anijs"]);
@@ -27,7 +27,7 @@ twitterClone.directive("back",["$window",function($window){
         link : function(scope,element,attributes){
             element.bind("click",function(){
                 $window.history.back();
-            })
+            });
         }
     };
 }]);
