@@ -1,0 +1,8 @@
+*/bin/*
+bin
+*/obj/*
+obj
+packages/
+Web.config
+Web.Release.config
+Web.Debug.config
