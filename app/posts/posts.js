@@ -1,4 +1,4 @@
-twitterClone.controller("postsController",["$scope","$http","_",function($scope,$http,_){
+twitterClone.controller("postsController",["$scope","$http","_","PostsAPIUrl",function($scope,$http,_,postsApiUrl){
     var posts = [],
         getPosts = function(){
             $scope.loaded = false;

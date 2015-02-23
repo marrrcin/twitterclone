@@ -1,24 +1,23 @@
-<div ng-controller="newpostController">
+<div>
     <div class="jumbotron" >
         <h1>#write</h1>
         <form class="form-inline" ng-submit="sendPost()">
             <div class="form-group">
-                <div class="input-group centered">
+                <div class="input-group centered" ng-class="{'has-error' : !author && !firstTry}">
                     <div class="input-group-addon fixed-width"><i class="fa fa-user"></i></div>
-                    <input type="text" placeholder="Author" ng-model="author" class="form-control"/>
+                    <input type="text" placeholder="Author" ng-model="author" class="form-control" ng-disabled="isSending"/>
                 </div>
-                <div class="input-group centered">
+                <div class="input-group centered" ng-class="{'has-error' : !newMessage && !firstTry}">
                     <div class="input-group-addon fixed-width"><i class="fa fa-comments"></i></div>
-                    <input type="text" placeholder="Message" ng-model="newMessage" class="form-control"/>
+                    <input type="text" placeholder="Message" ng-model="newMessage" class="form-control" ng-disabled="isSending"/>
 
                 </div>
                 <div class="input-group centered">
-                    <button type="submit" class="btn">&nbsp;&nbsp;<i class="fa fa-chevron-right"></i>&nbsp;&nbsp;</button>
+                    <button type="submit" class="btn">&nbsp;&nbsp;<i class="fa fa-chevron-right" ng-disabled="isSending"></i>&nbsp;&nbsp;</button>
                 </div>
             </div>
-
-
         </form>
+        <span ng-show="errorMessage">{{errorMessage}}</span>
 
     </div>
 </div>

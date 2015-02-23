@@ -9,7 +9,17 @@ var anijsModule = angular.module("anijs",[])
         return window.AniJS;
     });
 
+var postsProvider = angular.module("postsProvider",[])
+    .factory("prostsProvider",["$http",function($http){
+        return {
+            getAll : function(){
+
+            }
+        }
+    }]);
+
 var twitterClone = angular.module("twitterClone",["lodash","ngRoute","anijs"]);
+twitterClone.constant("PostsAPIUrl",postsApiUrl);
 twitterClone.config(["$routeProvider",function($routeProvider){
     $routeProvider
         .when("/",{
@@ -20,8 +30,8 @@ twitterClone.config(["$routeProvider",function($routeProvider){
             templateUrl : "app/newpost/newpost.html",
             controller : "newpostController"
         })
-        .when("/search",{
-            templateUrl : "app/search/search.html",
+        .when("/authors",{
+            templateUrl : "app/authors/authors.html",
             controller : "searchController"
         });
 }]);

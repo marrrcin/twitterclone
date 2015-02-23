@@ -1,3 +1,0 @@
-twitterClone.controller("searchController",[function(){
-
-}]);

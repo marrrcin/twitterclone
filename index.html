@@ -38,5 +38,15 @@
         <ng-view></ng-view>
         <apply-anijs></apply-anijs>
     </div>
+
+    <script type="text/javascript">
+        document.onreadystatechange = function(){
+            if(document.readyState === "complete"){
+                setTimeout(function(){
+                    AniJS.run();
+                },200);
+            }
+        };
+    </script>
 </body>
 </html>

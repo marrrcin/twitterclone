@@ -4,9 +4,10 @@ twitterClone.controller("navigationController",["$scope","$location",function($s
     };
 }]);
 
-twitterClone.directive("navigation", function () {
+twitterClone.directive("navigation", function(){
     return {
         restrict : "E",
-        templateUrl : "app/navigation/navigation.html"
+        templateUrl : "app/navigation/navigation.html",
+        controller : "navigationController"
     };
 });

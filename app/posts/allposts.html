@@ -2,7 +2,7 @@
     <div class="jumbotron" >
         <h1><span ng-hide="searchText">#search</span>
             <span ng-show="searchText">#found : {{searchCount}}</span></h1>
-        <input type="text" ng-model="searchText" ng-change="searchTextChange()" class="form-control narrow">
+        <input type="text" placeholder="type to search" ng-model="searchText" ng-change="searchTextChange()" class="form-control narrow">
     </div>
 
     <div class="row marketing">
