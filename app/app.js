@@ -20,6 +20,18 @@ var postsProvider = angular.module("postsProvider",[])
 
 var twitterClone = angular.module("twitterClone",["lodash","ngRoute","anijs"]);
 twitterClone.constant("PostsAPIUrl",postsApiUrl);
+
+twitterClone.directive("back",["$window",function($window){
+    return {
+        restrict : "A",
+        link : function(scope,element,attributes){
+            element.bind("click",function(){
+                $window.history.back();
+            })
+        }
+    };
+}]);
+
 twitterClone.config(["$routeProvider",function($routeProvider){
     $routeProvider
         .when("/",{
@@ -32,7 +44,11 @@ twitterClone.config(["$routeProvider",function($routeProvider){
         })
         .when("/authors",{
             templateUrl : "app/authors/authors.html",
-            controller : "searchController"
+            controller : "authorsController"
+        })
+        .when("/post/:id",{
+            templateUrl : "app/singlepost/singlepost.html",
+            controller : "singlepostController"
         });
 }]);
 

@@ -12,7 +12,11 @@ body {
   color:$lightGray;
 }
 
-.jumbotron > h1 {
+.dark-font {
+  color : $darkGray;
+}
+
+.jumbotron > h1, .jumbotron > div {
   color : $darkGray;
 }
 
@@ -55,6 +59,12 @@ body {
 
 .form-inline {
   font-size:14px !important;
+}
+
+.no-list-bullets {
+  list-style-type: none;
+  padding : 0;
+  margin : 10px;
 }
 
 .loader-icon {
